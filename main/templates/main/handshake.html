@@ -1,0 +1,22 @@
+{% extends 'main/base.html' %}
+
+{% block title %}6 рукопожатий{% endblock %}
+
+{% block content %}
+    <div class="features">
+        <h1>Собсно смотрите</h1>
+        <p>На данный момент наш сайт выглядит очень плохо. У него нет ни стилей, ни картинок, ни корректного HTML кода. В уроке мы это исправим. Мы добавим Bootstrap, пропишем HTML и создадим красивые стили для всего нашего сайта.</p>
+
+        {% for el in context %}
+            <div class="alert alert-warning">
+                <h3>{{ el }}</h3>
+            </div>
+        {% endfor %}
+        <form method="post">
+            <input type="text" placeholder="Первый челик" class="form-control" name="firstman"><br>
+            <input type="text" placeholder="Второй челик" class="form-control" name="secondman"><br>
+            <button class="btn btn-success" type="submit">Ща чекнем</button>
+            {% csrf_token %}
+        </form>
+    </div>
+{% endblock %}
