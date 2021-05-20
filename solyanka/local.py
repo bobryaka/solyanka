@@ -1,6 +1,4 @@
 from pathlib import Path
-import os
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -16,6 +14,3 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-STATIC_DIR = os.path.join(BASE_DIR, 'static')
-STATICFILES_DIRS = [STATIC_DIR]
