@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,15 +21,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-j2ukx4$%nmn#*rti*07zw^q&c9ghshsvhbnf+dngkdi%bs7k$^'
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-j2ukx4$%nmn#*rti*07zw^q&c9ghshsvhbnf+dngkdi%bs7k$^')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
+DEBUG = os.environ.get('DJDEBUG', True)
+# env = environ.Env()
+# DEBUG = env.bool('MY_DEBUG_ENV_VAR', default=False)
 
-ALLOWED_HOSTS = []
+# DEBUG = bool(int(os.environ.get('DEBUG_VALUE', 1)))
+ALLOWED_HOSTS = ["127.0.0.1", "104.248.206.95"]
+
 
 
 # Application definition
@@ -75,29 +76,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'solyanka.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-if os.path.exists('db.sqlite3'):
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql_psycopg2',
-            'NAME': 'testbase',
-            'USER': 'testuser',
-            'PASSWORD': '123456',
-            'HOST': 'localhost',
-            'PORT': '5432'
-        }
-    }
-
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -136,11 +114,21 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+STATICFILES_DIRS = [STATIC_DIR]
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
+# вот это снизу ваще не точно
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+try:
+    from .local import *
+except ImportError:
+    from .prod import *
+
