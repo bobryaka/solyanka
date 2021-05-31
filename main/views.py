@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
-def main_page(request):
-    return render(request, 'main/main.html')
+def index(request):
+    return render(request, 'main/index.html')
 
 def handshake(request):
     if request.method == 'POST':
@@ -12,5 +12,7 @@ def handshake(request):
         return render(request, 'main/handshake.html', {'context': context})
     return render(request, 'main/handshake.html')
 
+def contacts(request):
+    return render(request, 'main/contacts.html')
 
 
