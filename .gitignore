@@ -2,3 +2,5 @@ db.sqlite3
 /solyanka/prod.py
 
 /venv/
+
+/main/tokens.py
