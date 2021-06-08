@@ -1,21 +1,63 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-{% block title %}Глагне{% endblock %}
+{% block title %}Резюме{% endblock %}
 
-{% block description %}<p>Below you can find more information about our company</p>{% endblock %}
+{% block description %}<p>Python Back-end Junior</p>{% endblock %}
 
 {% block content %}
     <!-- About Us Text -->
     <div class="about-us container">
         <div class="row">
             <div class="about-us-text span12">
-                <h4>Чивердин</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper <span class="violet">suscipit lobortis</span> nisl ut aliquip ex ea commodo consequat. Lorem ipsum <strong>dolor sit amet</strong>, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do <strong>eiusmod tempor</strong> incididunt.</p>
-                <h4>Our Mission</h4>
-                <p>Lorem ipsum dolor sit amet, <span class="violet">consectetur adipisicing</span> elit, sed do eiusmod tempor incididunt ut labore et. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, <strong>consectetur adipisicing</strong> elit, sed do eiusmod <span class="violet">tempor incididunt</span> ut labore et. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
-                <h4>Why Choose Us</h4>
-                <p>Lorem ipsum dolor sit amet, <strong>consectetur adipisicing elit</strong>, sed do eiusmod tempor incididunt ut labore et. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et. Ut wisi enim ad minim veniam, quis <span class="violet">nostrud exerci</span> tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt.</p>
+                <h4>Образование</h4>
+                <p> <strong>АУЭС</strong>: Бакалавр <br> Электроэнергетический факультет, Электроэнергетика <span class="violet">consectetur adipisicing</span></p>
+                <h4>Курсы</h4>
+                <p>Coursera <strong>Погружение в Python</strong> (Московский физико-технический институт)<br>
+                Coursera <strong>ООП и паттерны проектирования в Python</strong> (Московский физико-технический институт)</p>
+                <h4>Опыт работы</h4>
+                <p>Август 2017 - Январь 2019 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    АО "Казремэнерго" &nbsp;&nbsp;&nbsp; Электрослесарь 5 разряда <br>
+                Январь 2019 - По настоящее время &nbsp;&nbsp;&nbsp; АО "Казремэнерго" &nbsp;&nbsp;&nbsp; Мастер цеха КИПиРЗА<br>
+                Несмотря на то, что опыт работы нерелевантен в плане Hard skills. Я получил и развил навыки:
+                    <ul>
+                        <li>Работы в команде, как в качестве исполнителя, так и руководителя.</li>
+                        <li>Несения ответственности за выполнение работ первостепенной важности</li>
+                        <li>Работы в условиях крайне ограниченного времени.</li>
+                    </ul>
+                </p>
+                <h4>Навыки</h4>
+                    <ul>
+                        <li>Python</li>
+                        <div class="progress progress-info">
+                            <div class="bar" style="width: 50%"></div>
+                        </div>
+                        <p>Базовый</p>
+                       <li>SQL, PostgreSQL</li>
+                        <div class="progress progress-info">
+                            <div class="bar" style="width: 25%"></div>
+                        </div>
+                        <p>Начальный</p>
+                        <li>HTML5, CSS</li>
+                        <div class="progress progress-info">
+                            <div class="bar" style="width: 25%"></div>
+                        </div>
+                        <p>Начальный</p>
+                        <li>Django, Git, Linux</li>
+                        <div class="progress progress-info">
+                            <div class="bar" style="width: 25%"></div>
+                        </div>
+                        <p>Начальный</p>
+                        <li>ООП</li>
+                        <div class="progress progress-info">
+                            <div class="bar" style="width: 25%"></div>
+                        </div>
+                        <p>Начальный</p>
+                    </ul>
+                <h4>О себе</h4>
+                <p>В работе организован, последователен. Всю выполняемую работу и получаемую информацию стараюсь структурировать
+                и оптимизировать. <br> Вне работы часто организовывал импровизированные тимбилдинги и неформальные встречи коллег.</p>
+
             </div>
         </div>
     </div>
@@ -23,7 +65,7 @@
     <!-- Testimonials -->
     <div class="testimonials container">
         <div class="testimonials-title">
-            <h3>Testimonials</h3>
+            <h3>Отзывы коллег</h3>
         </div>
         <div class="row">
             <div class="testimonial-list span12">

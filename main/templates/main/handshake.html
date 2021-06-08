@@ -1,23 +1,32 @@
 {% extends 'main/base.html' %}
 {% load static %}
 
-{% block title %}6кадрав{% endblock %}
+{% block title %}Рукопожатия{% endblock %}
 
-{% block description %}<p>Below you can find more information about our company</p>{% endblock %}
+{% block description %}<p>Моя версии теории 6 рукопажатий</p>{% endblock %}
 {% block content %}
-    <div class="features">
-        <h1>Собсно смотрите</h1>
-        <p>На данный момент наш сайт выглядит очень плохо. У него нет ни стилей, ни картинок, ни корректного HTML кода. В уроке мы это исправим. Мы добавим Bootstrap, пропишем HTML и создадим красивые стили для всего нашего сайта.</p>
+    <div class="contact container">
 
-        {% for el in context %}
-            <div class="alert alert-warning">
-                <h3>{{ el }}</h3>
-            </div>
+        <p>На самом деле 4. Для нахождения пятого и тем более шестого рукопожатия уйдет слишком много времени,
+            так как у API VK есть свои ограничения.<br> Занимется эта штуковина тем, что прокладывает путь через
+            друзей от первого пользователя вк, до второго.<br> Фотографии являются ссылками на страницы этих самых людей. Код
+        можно посмотреть на гитхабе (ссылка внизу страницы), лежит в файле <em>main/services.py</em>. <br>Там все запаковано в класс,
+        есть комментарии и он пригоден для повторного использования.</p>
+        <img src="{% static 'main/img/instruction.png' %}" class="img-rounded" alt="">
+
+        {% for element in context %}
+            <div class="container">
+                <div class="contact-text">
+                    <a href="{{ element.id }}"><img src="{{ element.photo }}" class="img-rounded" alt=""></a>
+                    <p> {{ element.name }} </p>
+                </div>
+             </div>
         {% endfor %}
+
         <form method="post">
-            <input type="text" placeholder="Первый челик" class="form-control" name="firstman"><br>
-            <input type="text" placeholder="Второй челик" class="form-control" name="secondman"><br>
-            <button class="btn btn-success" type="submit">Ща чекнем</button>
+            <input type="text" placeholder="Введите Id или ник первого человека" class="form-control" name="firstman"><br>
+            <input type="text" placeholder="Сюда второго" class="form-control" name="secondman"><br>
+            <button class="btn btn-default" type="submit">Ща чекнем</button>
             {% csrf_token %}
         </form>
     </div>

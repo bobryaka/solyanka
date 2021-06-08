@@ -602,8 +602,68 @@ footer .social a:hover { background-position: left top; }
 .about-us-text p {
     padding: 0 20px;
     line-height: 28px;
-    font-size: 13px;
+    font-size: 14px;
 }
+
+.about-us-text li {
+    margin-left: 40px;
+    font-size: 14px;
+    margin-top: 4px;
+}
+
+.progress {
+    max-width: 400px;
+    margin-top: 10px;
+}
+
+ul > p {
+    margin-top: -20px;
+    font-size: 10px;
+    font-style: italic;
+    margin-left: 280px;
+    margin-bottom: 1px;
+}
+.contact {
+    margin-top: 20px;
+}
+
+.contact-text {
+    padding: 10px 0;
+    text-align: center;
+}
+
+.contact h4 {
+    margin-top: 25px;
+    padding: 0 20px;
+    font-family: 'Droid Sans', Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    color: #5d5d5d;
+    text-transform: uppercase;
+    text-shadow: 0 1px 0 rgba(255,255,255,.7);
+}
+
+.contact p {
+    padding: 0 20px;
+    line-height: 28px;
+    font-size: 14px;
+    margin-top: 5px;
+    color: #5d5d5d;
+}
+
+.img-rounded {
+    margin-bottom: 10px;
+}
+
+.btn-default {
+    margin-top: 10px;
+    width: 200px;
+    color: #5d5d5d;
+}
+
+input, textarea, .uneditable-input {
+    width: 300px;
+}
+
 
 /* ----- Meet our team ----- */
 

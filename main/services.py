@@ -2,25 +2,23 @@ import requests
 import json
 import random
 import time
-from tokens import keys
 
 
 def defender(id, token, api):
-    kek = requests.get("https://api.vk.com/method/users.get?user_ids=%s&access_token=%s&v=%s" % (
-    id, token, api)).json()['response'][0]
     try:
-        if not kek['is_closed']:
-            return 'ok', kek['id']
-        elif kek['is_closed']:
-            return "Хозяин профайла своего закрыл его и друзей не видно"
+        user = requests.get("https://api.vk.com/method/users.get?user_ids=%s&fields=photo_200&access_token=%s&v=%s" % (
+            id, token, api)).json()['response'][0]
+        if not user['is_closed']:
+            return 'ok', user
+        elif user['is_closed']:
+            return "not ok"
     except KeyError:
-        return "Страница удалена или што такое с ней еще приключилось"
+        return "not ok"
 
 
 class Contact:
 
     api = '5.131'
-
 
     def __init__(self, user1_id, user2_id, keys):
         self.user1_id = user1_id
@@ -31,7 +29,6 @@ class Contact:
         self.app_token2 = keys[3]
         self.drugi_1chela = self.friends_get(self.user1_id)
         self.drugi_2chela = self.friends_get(self.user2_id)
-
 
     def friends_get(self, user_id):
         all_fr = requests.get("https://api.vk.com/method/friends.get?user_id=%s&fields=1&access_token=%s&v=%s" % (
@@ -93,7 +90,6 @@ class Contact:
             time.sleep(0.34)
         return self.handshake_4()
 
-
     def handshake_4(self):
         dd_1ch = Contact.get_fr_of_fr(self.drugi_1chela, self.app_token)
         dd_2ch = Contact.get_fr_of_fr(self.drugi_2chela, self.app_token2)
@@ -110,4 +106,4 @@ class Contact:
                         self.user2_id, m3_friend, self.user_token, Contact.api)).json()['response'][0]
                     return self.user1_id, m2_1friend, m3_friend, m2_2friend, self.user2_id
 
-        return "Не нашлись такие ребята"
+        return "not found"
