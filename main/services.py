@@ -2,18 +2,24 @@ import requests
 import json
 import random
 import time
+import re
 
 
 def defender(id, token, api):
     try:
+        temp = (re.findall(r'(?<=https://vk.com/id)\d+', id) if re.findall(r'(?<=https://vk.com/id)\d+', id) else
+                re.findall(r'(?<=https://vk.com/)\S+', id))
+        print(temp)
+        id = temp[0] if temp else id
+        print(id)
         user = requests.get("https://api.vk.com/method/users.get?user_ids=%s&fields=photo_200&access_token=%s&v=%s" % (
             id, token, api)).json()['response'][0]
         if not user['is_closed']:
             return 'ok', user
         elif user['is_closed']:
-            return "not ok"
-    except KeyError:
-        return "not ok"
+            return "closed"
+    except (KeyError, IndexError):
+        return "deactivated"
 
 
 class Contact:

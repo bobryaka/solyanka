@@ -13,22 +13,24 @@ def handshake(request):
         if not request.POST.get('firstman') or not request.POST.get('secondman'):
             return render(request, 'main/handshake.html')
 
-        data = list()
-        data.append(request.POST.get('firstman'))
-        data.append(request.POST.get('secondman'))
-
-        user1 = services.defender(data[0], keys[0], services.Contact.api)
+        user1 = services.defender(request.POST.get('firstman'), keys[0], services.Contact.api)
+        user2 = services.defender(request.POST.get('secondman'), keys[0], services.Contact.api)
         err_rep = dict()
-        err_rep['photo'] = "https://vk.com/images/camera_200.png"
+        err_rep['photo'] = "https://sun1.beeline-kz.userapi.com/s/v1/if1/Z8oRq-BszSyVfkSzkoGp78_rz704GcLTnu3FutEM7Rc-" \
+                           "7kamFR-Gy-0F_wC_a2t4nwkQ1Z_9.jpg?size=200x0&quality=96&crop=312,112,712,712&ava=1"
         err_rep['id'] = "https://vk.com/id223627530"
-        if user1[0] != 'ok':
-            err_rep['name'] = 'Хозяин первой страницы удалил её или што такое с ней еще приключилось'
-            return render(request, 'main/handshake.html', {'context': [err_rep, ]})
+        for user_index, user in enumerate((user1, user2)):
+            if user == 'closed':
+                err_rep['name'] = 'Страница %s пользователя закрыта, можете попробовать с другим пользователем, а ' \
+                                  'можете перейти на мою страничку нажав на фотографию и лайкнуть аву ' \
+                                  % ('первого' if user_index == 0 else 'второго')
+                return render(request, 'main/handshake.html', {'context': [err_rep, ]})
 
-        user2 = services.defender(data[1], keys[0], services.Contact.api)
-        if user2[0] != 'ok':
-            err_rep['name'] = 'Хозяин второй страницы удалил её или што такое с ней еще приключилось'
-            return render(request, 'main/handshake.html', {'context': [err_rep, ]})
+            elif user == 'deactivated':
+                err_rep['name'] = 'Страница %s пользователя удалена (либо не существует), можете попробовать с другим' \
+                                  ' пользователем, а можнете перейти на мою страничку нажав на фотографию и лайкнуть' \
+                                  ' аву' % ('первого' if user_index == 0 else 'второго')
+                return render(request, 'main/handshake.html', {'context': [err_rep, ]})
 
         all_ids = services.Contact(user1[1]['id'], user2[1]['id'], keys).handshake()
         if all_ids == 'not found':
