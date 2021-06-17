@@ -11,7 +11,6 @@ def defender(id, token, api):
         temp = (re.findall(r'(?<=https://vk.com/id)\d+', id) if re.findall(r'(?<=https://vk.com/id)\d+', id) else
                 re.findall(r'(?<=https://vk.com/)\S+', id))
         id = temp[0] if temp else id
-        print(id)
         user = requests.get("https://api.vk.com/method/users.get?user_ids=%s&fields=photo_200&access_token=%s&v=%s" % (
             id, token, api)).json()['response'][0]
         if not user['is_closed']:
@@ -81,7 +80,6 @@ class Contact:
 
     def handshake(self):
         # Если один чел просто есть в друзьях у другого чела возвращает их самих
-        #
         if int(self.user1_id) in self.drugi_2chela:
             return self.user1_id, self.user2_id
         return self.handshake_2()
