@@ -6,10 +6,12 @@ import re
 
 
 def defender(id, token, api):
+    id = str(id)
     try:
         temp = (re.findall(r'(?<=https://vk.com/id)\d+', id) if re.findall(r'(?<=https://vk.com/id)\d+', id) else
                 re.findall(r'(?<=https://vk.com/)\S+', id))
         id = temp[0] if temp else id
+        print(id)
         user = requests.get("https://api.vk.com/method/users.get?user_ids=%s&fields=photo_200&access_token=%s&v=%s" % (
             id, token, api)).json()['response'][0]
         if not user['is_closed']:
@@ -21,6 +23,13 @@ def defender(id, token, api):
 
 
 class Contact:
+    """
+    Реализация теории 6 рукопожатий Вконтакте (тут 4), принимает на вход 2 id, возвращает список, включающий
+    промежуточных друзей.
+    В качестве первых двух параметров принимает id, в качестве третьего список из 4 ключей (храню я их по понятным
+    причинам отдельно). Ключи должны передаваться соответсвенно их порядку в медоте __init__ и соответствовать типу.
+    Т.е. service_key это сервисный ключ приложения, user_token это user token и так далее.
+    """
 
     api = '5.131'
 
@@ -42,7 +51,8 @@ class Contact:
             try:
                 fr['deactivated']
             except KeyError:
-                norm_fr.append(fr['id'])
+                if not fr['is_closed']:
+                    norm_fr.append(fr['id'])
         return norm_fr
 
     @staticmethod
@@ -85,6 +95,7 @@ class Contact:
         return self.handshake_3()
 
     def handshake_3(self):
+        # Отправляет запросы на поиск общих друзей между вторым челом и друзьями первого чела
         for part in self.parts(self.drugi_1chela, 100):
             kek = requests.get("https://api.vk.com/method/friends.getMutual?source_uid=%s&target_uids=%s,%s&access_token=%s&v=%s"
                                % (self.user2_id, part[0], part, self.user_token, Contact.api)).json()['response']

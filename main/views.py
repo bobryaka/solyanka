@@ -21,17 +21,18 @@ def handshake(request):
         err_rep['id'] = "https://vk.com/id223627530"
         for user_index, user in enumerate((user1, user2)):
             if user == 'closed':
-                err_rep['name'] = 'Страница %s пользователя закрыта, можете попробовать с другим пользователем, а ' \
+                err_rep['name'] = 'Страница %s пользователя закрыта, можете попробовать с другим, а ' \
                                   'можете перейти на мою страничку нажав на фотографию и лайкнуть аву ' \
                                   % ('первого' if user_index == 0 else 'второго')
+                err_rep['smile'] = 'https://www.meme-arsenal.com/memes/5036975aac221f9edae77eec70138723.jpg'
                 return render(request, 'main/handshake.html', {'context': [err_rep, ]})
 
             elif user == 'deactivated':
                 err_rep['name'] = 'Страница %s пользователя удалена (либо не существует), можете попробовать с другим' \
-                                  ' пользователем, а можнете перейти на мою страничку нажав на фотографию и лайкнуть' \
+                                  ', а можнете перейти на мою страничку нажав на фотографию и лайкнуть' \
                                   ' аву' % ('первого' if user_index == 0 else 'второго')
+                err_rep['smile'] = 'https://www.meme-arsenal.com/memes/5036975aac221f9edae77eec70138723.jpg'
                 return render(request, 'main/handshake.html', {'context': [err_rep, ]})
-
         all_ids = services.Contact(user1[1]['id'], user2[1]['id'], keys).handshake()
         if all_ids == 'not found':
             err_rep['name'] = 'Вы друг от друга слишком далеки'
